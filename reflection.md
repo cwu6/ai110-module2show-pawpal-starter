@@ -12,6 +12,14 @@ Three core actions:
     2. Add and Manage care tasks: The user can add and edit tasks such as walking, feeding, grooming, medication. They also provide specific details about the duration of these tasks or their priority
     3. Generate a daily schedule: The user can generate a daily schedule based on their needs, avaliability, and preferences
 
+Initial UML Design:
+Classes:
+    - Owner: Stores the owner's name, preferences, and available time for pet. It also manages the owner's pet and allows for their availibility to be updated
+    - Pet: Stores information about the pet, including its name, breed, age, and specific care needs. It also assists in tracking the pet's care tasks
+    - Task: Defines a pet care activity, including walking, grooming, or feeding
+    - Schedule: Organizes the pet care tasks into a daily schedule. It generates a schedule based on the tasks needs and priorities, availibility, and explains why each task was assigned
+    
+
 **b. Design changes**
 
 - Did your design change during implementation?
