@@ -1,0 +1,37 @@
+
+classDiagram
+    class Owner {
+        +String name
+        +int availableMinutes
+        +String preferences
+        +addPet(Pet pet)
+        +updateAvailability(int minutes)
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +int age
+        +String careNeeds
+        +addTask(Task task)
+    }
+
+    class Task {
+        +String name
+        +int duration
+        +String priority
+        +String preferredTime
+        +isFeasible(int availableMinutes) bool
+    }
+
+    class Schedule {
+        +String date
+        +List~Task~ tasks
+        +int totalDuration
+        +generatePlan()
+        +explainPlan()
+    }
+
+    Owner "1" --> "1..*" Pet : owns
+    Pet "1" --> "0..*" Task : needs care
+    Schedule "1" o-- "0..*" Task : organizes
