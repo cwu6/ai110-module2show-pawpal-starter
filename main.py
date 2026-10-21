@@ -1,10 +1,10 @@
 from pawpal_system import Owner, Pet, Task, Scheduler
 
 
-owner = Owner("Alex")
+owner = Owner("Chloe")
 
-dog = Pet("Biscuit", "Dog", 3)
-cat = Pet("Mochi", "Cat", 2)
+dog = Pet("Rachel", "Dog", 3)
+cat = Pet("Jules", "Cat", 2)
 
 dog.add_task(Task("Morning walk", "8:00 AM", "daily"))
 dog.add_task(Task("Breakfast", "8:30 AM", "daily"))
@@ -36,8 +36,8 @@ print("\n--- Pending Tasks ---")
 for task in scheduler.filter_by_status(False):
     print(f"{task.time} - {task.description}")
 
-print("\n--- Biscuit's Tasks ---")
-for task in scheduler.filter_by_pet("Biscuit"):
+print("\n--- Rachel's Tasks ---")
+for task in scheduler.filter_by_pet("Rachel"):
     print(f"{task.time} - {task.description}")
 
 morning_walk = dog.tasks[0]

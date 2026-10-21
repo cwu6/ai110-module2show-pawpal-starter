@@ -8,14 +8,14 @@
 - What classes did you include, and what responsibilities did you assign to each?
 
 Three core actions:
-    1. Enter the owner and pet's information: The user can enter basic information about themselves and their pet. Such information can include owner's name and avaliability, pet's name, breed, and special care needs, and any care preferences the owner may have
+    1. Enter the owner and pet's information: The user can enter basic information about themselves and their pet. Such information can include owner's name and avaliability, pet's name, species, and special care needs, and any care preferences the owner may have
     2. Add and Manage care tasks: The user can add and edit tasks such as walking, feeding, grooming, medication. They also provide specific details about the duration of these tasks or their priority
     3. Generate a daily schedule: The user can generate a daily schedule based on their needs, avaliability, and preferences
 
 Initial UML Design:
 Classes:
     - Owner: Stores the owner's name, preferences, and available time for pet. It also manages the owner's pet and allows for their availibility to be updated
-    - Pet: Stores information about the pet, including its name, breed, age, and specific care needs. It also assists in tracking the pet's care tasks
+    - Pet: Stores information about the pet, including its name, species, age, and specific care needs. It also assists in tracking the pet's care tasks
     - Task: Defines a pet care activity, including walking, grooming, or feeding
     - Schedule: Organizes the pet care tasks into a daily schedule. It generates a schedule based on the tasks needs and priorities, availibility, and explains why each task was assigned
 
@@ -35,6 +35,8 @@ Based on AI feedback and reviewing my initial skeleton, I noticied some missing 
 
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
 - How did you decide which constraints mattered most?
+
+Constraints my scheduler considers is scheduled time, task frequency, completion status, due date, and which pet each task belongs to. I prioritized organizing tasks by time so that the owners can easily see the order of their pet care activities. The scheduler can also filter tasks by completion status or pet and identify problems when two tasks have the same scheduled time and due date. I also implemented recurring task behavior for daily and weekly tasks so that the next occurrence can be created when a task is marked completed. I decided that these constraints mattered most because the main goal is ensuring that the owners organize their pets' care tasks. The order in which the tasks appeared, completetion status, and due date all are essential in tracking what and when needs should be done. This keeps the schedule managable and simple while also letting the owner have their preferences.
 
 **b. Tradeoffs**
 
@@ -69,11 +71,14 @@ One moment where I did not accept an AI suggestion as-is is when making sure tha
 - What behaviors did you test?
 - Why were these tests important?
 
+Behaviors I tested was the adding of the pets and tasks, retrieving tasks from multiple pets, sorting tasks by time, filtering tasks by completion status and pet name, marking tasks as complete, creating the next occurrence of a recurring task, and detecting scheduling conflicts. I used main.py to test these behaviors and ran the test using python -m pytest, which passed all seven tests. These tests were important because they helped me verify that the classes worked together correctly and that the scheduler could manage tasks for multiple pets rather than just one.
+
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
 
+I am somewhat confident that my scheduler works because I tested my methods and confirmed that the tests passed. However, there are still edge cases I feel like I may have missed. For example, I would still like to test tasks with identical names or multiple conflicts on the same date. I would also test monthly recurring tasks because the current scheduler only addresses occurrences for daily and weekly tasks, but not monthly tasks. These additional tests would help me find any limitations and make the system more in depth.
 ---
 
 ## 5. Reflection
@@ -81,11 +86,14 @@ One moment where I did not accept an AI suggestion as-is is when making sure tha
 **a. What went well**
 
 - What part of this project are you most satisfied with?
+The part of this project I am most satisfied with is figuring out how the different classes worked together to oragnize the care tasks for multiple pets. The Owner, Pet, Task, and Scheduler classes each have their own specific responsibilities, so it was interesting to learn about each one. I am also satisfied that I was able to connect the scheduling logic to the Streamlit interface so users can add pets, create care tasks, and generate a sorted schedule. It was cool to see a super interactive website.
 
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
+If I had another iteration, I would improve the scheduling logic by adding task durations so the scheduler could detect overlapping tasks instead of only detecting tasks with the exact same time and due date. I would also like to try to implement an ability for the users to mark tasks as complete directly in the Streamlit interface so its even more organized.
 
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+One important thing I learned about designing systems is that it goes beyond just umplementing individual methods. The classes needed to work together through their own specific responsibilities but also maintaining a relationship. I also learned that AI can be useful for brainstorming, debugging, and help furthur understand concepts, but its suggestions still need to be reviewed and tested. By running the demo and doing tests, I could verify that the implementation behaved as expected instead of just relying on the AI generated code being correct.

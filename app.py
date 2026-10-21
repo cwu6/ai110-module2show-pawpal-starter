@@ -129,7 +129,8 @@ st.subheader("Build Schedule")
 
 if st.button("Generate Schedule"):
     scheduler = Scheduler(st.session_state.owner)
-    tasks = scheduler.get_tasks()
+
+    tasks = scheduler.sort_by_time()
 
     if tasks:
         st.success("Here is your schedule!")
@@ -140,5 +141,15 @@ if st.button("Generate Schedule"):
                 f"**{task.time}** — {task.description} "
                 f"({task.frequency}) — {status}"
             )
+
+        conflicts = scheduler.find_conflicts()
+
+        if conflicts:
+            st.subheader("⚠️ Scheduling Conflicts")
+            for warning in conflicts:
+                st.warning(warning)
+        else:
+            st.success("No scheduling conflicts found.")
+
     else:
         st.info("No tasks yet. Add a task first.")
