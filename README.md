@@ -84,8 +84,35 @@ What the tests cover:
 - Handling pets with no tasks
 
 Sample test output:
-
 ```
+Today's Schedule
+----------------
+8:00 AM - Morning walk (daily) - Pending
+8:30 AM - Breakfast (daily) - Pending
+9:00 AM - Breakfast (daily) - Pending
+
+--- Tasks Sorted by Time ---
+8:00 AM - Morning walk
+8:30 AM - Breakfast
+9:00 AM - Breakfast
+
+--- Pending Tasks ---
+8:00 AM - Morning walk
+8:30 AM - Breakfast
+9:00 AM - Breakfast
+
+--- Rachel's Tasks ---
+8:00 AM - Morning walk
+8:30 AM - Breakfast
+
+--- Test Recurring Tasks ---
+2026-10-21 - 8:00 AM - Morning walk - Completed
+2026-10-21 - 8:30 AM - Breakfast - Pending
+2026-10-22 - 8:00 AM - Morning walk - Pending
+
+--- Test Conflict Detection ---
+Conflict: Rachel's 'Morning walk' and Jules's 'Vet appointment' are both scheduled at 8:00 AM on 2026-10-21.
+
 # Paste your pytest output here
 ```
 ====================================== test session starts ======================================
@@ -118,41 +145,11 @@ Describe your app in numbered steps so a reader can follow along without watchin
 
 1. Enter Owner Information: The user enters their name in the Owner information section
 2. Enter Pets: The user enters a pet's name, select its species, and enters its age. Click Add Pet to save the pet
-3. Verify Your Pets: Check the Your Pets section to enusre the pet has been added
+3. Verify Your Pets: Check the Your Pets section to ensure the pet has been added
 4. Add A Care Task: Select a pet, enter the task and task time, choose a frequency, and click Add Task
 5. Verify Current Tasks: Review each pet's care tasks, including scheduled time, frequency, and status of completion
 6. Generate A Schedule: Click Generate Schedule to display tasks that are sorted by scheduled time
 7. Check for Scheduling Conflicts: Review any warnings about tasks scheduled at the same time on the same date
-
-Example output: python main.py
-
-Today's Schedule
-----------------
-8:00 AM - Morning walk (daily) - Pending
-8:30 AM - Breakfast (daily) - Pending
-9:00 AM - Breakfast (daily) - Pending
-
---- Tasks Sorted by Time ---
-8:00 AM - Morning walk
-8:30 AM - Breakfast
-9:00 AM - Breakfast
-
---- Pending Tasks ---
-8:00 AM - Morning walk
-8:30 AM - Breakfast
-9:00 AM - Breakfast
-
---- Rachel's Tasks ---
-8:00 AM - Morning walk
-8:30 AM - Breakfast
-
---- Test Recurring Tasks ---
-2026-10-21 - 8:00 AM - Morning walk - Completed
-2026-10-21 - 8:30 AM - Breakfast - Pending
-2026-10-22 - 8:00 AM - Morning walk - Pending
-
---- Test Conflict Detection ---
-Conflict: Rachel's 'Morning walk' and Jules's 'Vet appointment' are both scheduled at 8:00 AM on 2026-10-21.
 
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
