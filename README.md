@@ -53,6 +53,17 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
 #   09:00 — Feeding (10 min) [priority: high]
 #   ...
 ```
+My Sample:
+
+Today's Schedule
+----------------
+8:00 AM - Morning walk (daily) - Pending
+8:30 AM - Breakfast (daily) - Pending
+9:00 AM - Breakfast (daily) - Pending
+
+Implementation Summary:
+
+I built a pet care tasks scheduling system. The Task class stores each task's description, time, frequency, and status of completion. The Pet class stores pet information and manage its tasks. The Owner class manages multiple pets and collects tasks from all of the pets by using get_all_tasks(). The Scheduler class gets the tasks through the Owner class and manages the schedule.
 
 ## 🧪 Testing PawPal+
 

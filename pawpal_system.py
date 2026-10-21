@@ -1,25 +1,21 @@
-
 from dataclasses import dataclass, field
 from typing import List
 
 
-class Owner:
-    def __init__(
-        self,
-        name: str,
-        available_minutes: int,
-        preferences: str
-    ):
-        self.name = name
-        self.available_minutes = available_minutes
-        self.preferences = preferences
-        self.pets = []
+@dataclass
+class Task:
+    description: str
+    time: str
+    frequency: str
+    completed: bool = False
 
-    def add_pet(self, pet):
-        pass
+    def mark_complete(self):
+        """Mark the task as completed."""
+        self.completed = True
 
-    def update_availability(self, minutes: int):
-        pass
+    def mark_incomplete(self):
+        """Mark the task as incomplete."""
+        self.completed = False
 
 
 @dataclass
@@ -27,32 +23,65 @@ class Pet:
     name: str
     species: str
     age: int
-    care_needs: str
-    tasks: List["Task"] = field(default_factory=list)
+    tasks: List[Task] = field(default_factory=list)
 
-    def add_task(self, task: "Task"):
-        pass
+    def add_task(self, task: Task):
+        """Add a task to the pet's task list."""
+        self.tasks.append(task)
+
+    def get_tasks(self) -> List[Task]:
+        """Return the pet's task list."""
+        return self.tasks
 
 
 @dataclass
-class Task:
+class Owner:
     name: str
-    duration: int
-    priority: str
-    preferred_time: str = ""
+    pets: List[Pet] = field(default_factory=list)
 
-    def is_feasible(self, available_minutes: int) -> bool:
-        pass
+    def add_pet(self, pet: Pet):
+        """Add a pet to the owner's pet list."""
+        self.pets.append(pet)
+
+    def get_all_tasks(self) -> List[Task]:
+        """Return all tasks belonging to the owner's pets."""
+        all_tasks = []
+
+        for pet in self.pets:
+            all_tasks.extend(pet.get_tasks())
+
+        return all_tasks
 
 
-class Schedule:
-    def __init__(self, date: str, tasks: List[Task] = None):
-        self.date = date
-        self.tasks = tasks if tasks is not None else []
-        self.total_duration = 0
+class Scheduler:
+    def __init__(self, owner: Owner):
+        """Initialize the scheduler with an owner."""
+        self.owner = owner
 
-    def generate_plan(self):
-        pass
+    def get_tasks(self) -> List[Task]:
+        """Return all tasks belonging to the owner."""
+        return self.owner.get_all_tasks()
 
-    def explain_plan(self):
-        pass
+    def get_pending_tasks(self) -> List[Task]:
+        """Return tasks that have not been completed."""
+        pending_tasks = []
+
+        for task in self.get_tasks():
+            if not task.completed:
+                pending_tasks.append(task)
+
+        return pending_tasks
+
+    def get_tasks_for_frequency(self, frequency: str) -> List[Task]:
+        """Return tasks matching the specified frequency."""
+        matching_tasks = []
+
+        for task in self.get_tasks():
+            if task.frequency == frequency:
+                matching_tasks.append(task)
+
+        return matching_tasks
+
+    def mark_task_complete(self, task: Task):
+        """Mark the specified task as completed."""
+        task.mark_complete()

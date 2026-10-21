@@ -18,12 +18,14 @@ Classes:
     - Pet: Stores information about the pet, including its name, breed, age, and specific care needs. It also assists in tracking the pet's care tasks
     - Task: Defines a pet care activity, including walking, grooming, or feeding
     - Schedule: Organizes the pet care tasks into a daily schedule. It generates a schedule based on the tasks needs and priorities, availibility, and explains why each task was assigned
-    
+
 
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+Based on AI feedback and reviewing my initial skeleton, I noticied some missing relationships and methods that could use improvement. For instance, the Owner class needs a way to manage multiple pets. To fix this, I added a type hint to the pets lists so that it could contain Pet objects and added an add_pet() method. The Pet Class needed a way to store and manage the tasks so I kept the tasks list but added an add_task() method. Additionally, the Schedule class needed a more direct way to get the tasks across all of the owner's pets, so I added an Owner.get_all_tasks() method. I also updated the Schedule class to accept an Owner object to allow the scheduling logic to connect to the owner's pets. 
 
 ---
 
@@ -48,11 +50,14 @@ Classes:
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
 - What kinds of prompts or questions were most helpful?
 
+I used AI to help implement the methods in pawpal_system.py and to understand the relationships between the Task, Pet, Owner, and Scheduler classes. I also used AI to help write the demo script for main.py and draft two basic tests for task completion and task addition. Additionally, it assisted to adding one-line docstrings to my methods. AI also assisted in debugging and clafification for certain concepts I didn;t undersatnd such as type hints or improving code readability. The most helpful prompts were specific questions about how a method should work and how to verify that my implemenations work. For instance, I asked "How should the Scheduler get all the tasks from the Owner's Pets?" This allows me to understand how classes interact and their relationships.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
 - How did you evaluate or verify what the AI suggested?
 
+One moment where I did not accept an AI suggestion as-is is when making sure that the Scheduler class recieved tasks from multiple pets. Initially, the AI suggested an implementation where it only recieved tasks from one pet. But after reviewing the instructions, I realized that it needed to target multiple pets simulatenously. So I made sure Scheduler.get_tasks() called Owner.get_all_tasks() which helps collects the tasks from every pet. To verify what AI suggested I ran main.py and made sure the schedule displayed all the tasks from all pets. 
 ---
 
 ## 4. Testing and Verification
