@@ -69,17 +69,37 @@ I built a pet care tasks scheduling system. The Task class stores each task's de
 
 ```bash
 # Run the full test suite:
-pytest
+python -m pytest
 
 # Run with coverage:
-pytest --cov
+python -m pytest --cov
 ```
+
+What the tests cover:
+- Task completion and task addition
+- Sorts tasks by scheduling time
+- Daily recurring task creation
+- Detecting conflicts for tasks scheduled at the same time
+- Filtering tasks by completion status
+- Handling pets with no tasks
 
 Sample test output:
 
 ```
 # Paste your pytest output here
 ```
+====================================== test session starts ======================================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0
+rootdir: /Users/chlxe/ai110-module2show-pawpal-starter
+plugins: anyio-4.15.1
+collected 7 items                                                                               
+
+tests/test_pawpal.py .......                                                              [100%]
+
+======================================= 7 passed in 0.02s =======================================
+
+Confidence Level: 
+4/5 stars
 
 ## 📐 Smarter Scheduling
 
