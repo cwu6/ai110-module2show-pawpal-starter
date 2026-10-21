@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
+from datetime import date, datetime, timedelta
 
 
 @dataclass
@@ -8,6 +9,7 @@ class Task:
     time: str
     frequency: str
     completed: bool = False
+    due_date: date = field(default_factory=date.today)
 
     def mark_complete(self):
         """Mark the task as completed."""
@@ -83,5 +85,83 @@ class Scheduler:
         return matching_tasks
 
     def mark_task_complete(self, task: Task):
-        """Mark the specified task as completed."""
+        """Mark a task complete and create its next recurring occurrence."""
+        if task.completed:
+            return
+
         task.mark_complete()
+
+        if task.frequency == "daily":
+            next_date = task.due_date + timedelta(days=1)
+        elif task.frequency == "weekly":
+            next_date = task.due_date + timedelta(days=7)
+        else:
+            return
+        
+        for pet in self.owner.pets:
+            if task in pet.tasks:
+                next_task = Task(
+                    task.description,
+                    task.time,
+                    task.frequency,
+                    due_date=next_date
+                )
+                pet.add_task(next_task)
+                return
+
+    def sort_by_time(self) -> List[Task]:
+        """Return all tasks sorted by their scheduled time."""
+        from datetime import datetime
+
+        return sorted(
+            self.get_tasks(),
+            key=lambda task: datetime.strptime(task.time, "%I:%M %p")
+        )
+    
+    def filter_by_status(self, completed: bool) -> List[Task]:
+        """Return tasks matching the requested completion status."""
+        matching_tasks = []
+
+        for task in self.get_tasks():
+            if task.completed == completed:
+                matching_tasks.append(task)
+
+        return matching_tasks
+    
+    def filter_by_pet(self, pet_name: str) -> List[Task]:
+        """Return tasks belonging to the pet with the given name."""
+        matching_tasks = []
+
+        for pet in self.owner.pets:
+            if pet.name.lower() == pet_name.lower():
+                matching_tasks.extend(pet.get_tasks())
+
+        return matching_tasks
+
+    def find_conflicts(self) -> List[str]:
+        """Return warnings for tasks scheduled at the same time."""
+        conflicts = []
+        tasks = []
+
+        for pet in self.owner.pets:
+            for task in pet.tasks:
+                tasks.append((pet.name, task))
+
+        for i in range(len(tasks)):
+            pet_name, task = tasks[i]
+
+            for j in range(i + 1, len(tasks)):
+                other_pet, other_task = tasks[j]
+
+                if (task.time == other_task.time
+                        and task.due_date == other_task.due_date):
+                    warning = (
+                        f"Conflict: {pet_name}'s '{task.description}' and "
+                        f"{other_pet}'s '{other_task.description}' are both "
+                        f"scheduled at {task.time} on {task.due_date}."
+                    )
+                    conflicts.append(warning)
+
+        return conflicts
+
+

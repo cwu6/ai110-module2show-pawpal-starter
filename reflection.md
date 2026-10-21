@@ -41,6 +41,8 @@ Based on AI feedback and reviewing my initial skeleton, I noticied some missing 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+One tradeoff my scheduler makes is that it checks whether tasks have the exact same scheduled time instead of checking whether their durations overlap. With this, it may miss conflicts between tasks that start at different times but overlap in duration. For example, a task from 8:00 AM to 8:30 AM could overlap with another task starting at 8:15 AM. A future improvement would be to add task durations and check whether their time intervals overlap. This tradeoff is reasonable because PawPal+ is a simple pet task scheduler, so checking for the exact time matches is easy to implement. It can warn owners when two tasks are scheduled at the same time without requiring extra information about task durations. Although it may miss tasks that overlap in duration, exact time matching is enough for the project's instructions and keeps the scheduler more simple.
+
 ---
 
 ## 3. AI Collaboration
